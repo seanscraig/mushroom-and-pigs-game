@@ -4,51 +4,73 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public new Rigidbody2D rigidbody { get; private set; }
+  public new Rigidbody2D rigidbody { get; private set; }
+  public KeyCode inputUp = KeyCode.W;
+  public KeyCode inputUpArrow = KeyCode.UpArrow;
+  public KeyCode inputDown = KeyCode.S;
+  public KeyCode inputDownArrow = KeyCode.DownArrow;
+  public KeyCode inputLeft = KeyCode.A;
+  public KeyCode inputLeftArrow = KeyCode.LeftArrow;
+  public KeyCode inputRight = KeyCode.D;
+  public KeyCode inputRightArrow = KeyCode.RightArrow;
+	public AnimatedSpriteRenderer spriteRendererUp;
+	public AnimatedSpriteRenderer spriteRendererDown;
+	public AnimatedSpriteRenderer spriteRendererLeft;
+	public AnimatedSpriteRenderer spriteRendererRight;
 
-    private Vector2 direction = Vector2.down;
+  public float speed = 5f;
 
-    public KeyCode inputUp = KeyCode.W;
-    public KeyCode inputUpArrow =  KeyCode.UpArrow;
-    public KeyCode inputDown = KeyCode.S;
-    public KeyCode inputDownArrow =  KeyCode.DownArrow;
-    public KeyCode inputLeft = KeyCode.A;
-    public KeyCode inputLeftArrow =  KeyCode.LeftArrow;
-    public KeyCode inputRight = KeyCode.D;
-    public KeyCode inputRightArrow =  KeyCode.RightArrow;
+  private Vector2 direction = Vector2.down;
+	private AnimatedSpriteRenderer activeSpriteRenderer;
 
-    public float speed = 5f;
+  private void Awake()
+  {
+    rigidbody = GetComponent<Rigidbody2D>();
+		activeSpriteRenderer = spriteRendererDown;
+  }
 
-    private void Awake()
+  private void Update()
+  {
+    if (Input.GetKey(inputUp) || Input.GetKey(inputUpArrow))
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+      setDirection(Vector2.up, spriteRendererUp);
     }
-
-    private void Update()
+    else if (Input.GetKey(inputDown) || Input.GetKey(inputDownArrow))
     {
-        if(Input.GetKey(inputUp)||Input.GetKey(inputUpArrow)) {
-            setDirection(Vector2.up);
-        } else if (Input.GetKey(inputDown)||Input.GetKey(inputDownArrow)) {
-            setDirection(Vector2.down);
-        } else if (Input.GetKey(inputLeft)||Input.GetKey(inputLeftArrow)) {
-            setDirection(Vector2.left);
-        } else if (Input.GetKey(inputRight)||Input.GetKey(inputRightArrow)) {
-            setDirection(Vector2.right);
-        } else {
-            setDirection(Vector2.zero);
-        }
+      setDirection(Vector2.down, spriteRendererDown);
     }
-
-    private void FixedUpdate() 
+    else if (Input.GetKey(inputLeft) || Input.GetKey(inputLeftArrow))
     {
-        Vector2 position = rigidbody.position;
-        Vector2 translation = direction * speed * Time.fixedDeltaTime;
-
-        rigidbody.MovePosition(position + translation);
+      setDirection(Vector2.left, spriteRendererLeft);
     }
-
-    private void setDirection(Vector2 newDirection) 
+    else if (Input.GetKey(inputRight) || Input.GetKey(inputRightArrow))
     {
-        direction = newDirection;
+      setDirection(Vector2.right, spriteRendererRight);
     }
+    else
+    {
+      setDirection(Vector2.zero, activeSpriteRenderer);
+    }
+  }
+
+  private void FixedUpdate()
+  {
+    Vector2 position = rigidbody.position;
+    Vector2 translation = direction * speed * Time.fixedDeltaTime;
+
+    rigidbody.MovePosition(position + translation);
+  }
+
+  private void setDirection(Vector2 newDirection, AnimatedSpriteRenderer spriteRenderer)
+  {
+    direction = newDirection;
+
+		spriteRendererUp.enabled = spriteRenderer == spriteRendererUp;
+		spriteRendererDown.enabled = spriteRenderer == spriteRendererDown;
+		spriteRendererLeft.enabled = spriteRenderer == spriteRendererLeft;
+		spriteRendererRight.enabled = spriteRenderer == spriteRendererRight;
+
+		activeSpriteRenderer = spriteRenderer;
+		activeSpriteRenderer.idle = direction == Vector2.zero;
+  }
 }
