@@ -9,8 +9,8 @@ public class BombController : MonoBehaviour
   public GameObject bombPrefab;
   public KeyCode inputKey = KeyCode.Space;
   public float bombFuseTime = 3f;
-  public int bombAmount = 1;
-  private int bombsRemaining;
+  public int mushroomAmount = 1;
+  private int mushroomsRemaining;
 
   [Header("Explosion")]
   public Explosion explosionPrefab;
@@ -24,12 +24,12 @@ public class BombController : MonoBehaviour
 
   private void OnEnable()
   {
-    bombsRemaining = bombAmount;
+    mushroomsRemaining = mushroomAmount;
   }
 
   private void Update()
   {
-    if (bombsRemaining > 0 && Input.GetKeyDown(inputKey))
+    if (mushroomsRemaining > 0 && Input.GetKeyDown(inputKey))
     {
       StartCoroutine(PlaceBomb());
     }
@@ -42,7 +42,7 @@ public class BombController : MonoBehaviour
     pos.y = Mathf.Round(pos.y);
 
     GameObject bomb = Instantiate(bombPrefab, pos, Quaternion.identity);
-    bombsRemaining--;
+    mushroomsRemaining--;
 
     yield return new WaitForSeconds(bombFuseTime);
 
@@ -60,7 +60,7 @@ public class BombController : MonoBehaviour
     Explode(pos, Vector2.right, explosionRadius);
 
     Destroy(bomb);
-    bombsRemaining++;
+    // bombsRemaining++;
   }
 
   private void OnTriggerExit2D(Collider2D other)
@@ -106,9 +106,9 @@ public class BombController : MonoBehaviour
     }
   }
 
-  public void AddBomb()
+  public void AddMushrooms(int amountOfMushroomsToAdd)
   {
-    bombAmount++;
-    bombsRemaining++;
+    mushroomAmount += amountOfMushroomsToAdd;
+    mushroomsRemaining += amountOfMushroomsToAdd;
   }
 }

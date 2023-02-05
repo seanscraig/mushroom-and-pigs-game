@@ -13,12 +13,14 @@ public class ItemPickup : MonoBehaviour
 
   public ItemType type;
 
+  public int amountOfMushroomsToAdd;
+
   private void OnItemPickup(GameObject player)
   {
     switch (type)
     {
       case ItemType.ExtraBomb:
-        player.GetComponent<BombController>().AddBomb();
+        player.GetComponent<BombController>().AddMushrooms(amountOfMushroomsToAdd);
         break;
       case ItemType.BlastRadius:
         player.GetComponent<BombController>().explosionRadius++;
