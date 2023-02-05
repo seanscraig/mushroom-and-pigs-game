@@ -13,20 +13,21 @@ public class PlayerController : MonoBehaviour
   public KeyCode inputLeftArrow = KeyCode.LeftArrow;
   public KeyCode inputRight = KeyCode.D;
   public KeyCode inputRightArrow = KeyCode.RightArrow;
-	public AnimatedSpriteRenderer spriteRendererUp;
-	public AnimatedSpriteRenderer spriteRendererDown;
-	public AnimatedSpriteRenderer spriteRendererLeft;
-	public AnimatedSpriteRenderer spriteRendererRight;
+  public AnimatedSpriteRenderer spriteRendererUp;
+  public AnimatedSpriteRenderer spriteRendererDown;
+  public AnimatedSpriteRenderer spriteRendererLeft;
+  public AnimatedSpriteRenderer spriteRendererRight;
+  public AnimatedSpriteRenderer spriteRendererDeath;
 
   public float speed = 5f;
 
   private Vector2 direction = Vector2.down;
-	private AnimatedSpriteRenderer activeSpriteRenderer;
+  private AnimatedSpriteRenderer activeSpriteRenderer;
 
   private void Awake()
   {
     rigidbody = GetComponent<Rigidbody2D>();
-		activeSpriteRenderer = spriteRendererDown;
+    activeSpriteRenderer = spriteRendererDown;
   }
 
   private void Update()
@@ -65,12 +66,40 @@ public class PlayerController : MonoBehaviour
   {
     direction = newDirection;
 
-		spriteRendererUp.enabled = spriteRenderer == spriteRendererUp;
-		spriteRendererDown.enabled = spriteRenderer == spriteRendererDown;
-		spriteRendererLeft.enabled = spriteRenderer == spriteRendererLeft;
-		spriteRendererRight.enabled = spriteRenderer == spriteRendererRight;
+    spriteRendererUp.enabled = spriteRenderer == spriteRendererUp;
+    spriteRendererDown.enabled = spriteRenderer == spriteRendererDown;
+    spriteRendererLeft.enabled = spriteRenderer == spriteRendererLeft;
+    spriteRendererRight.enabled = spriteRenderer == spriteRendererRight;
 
-		activeSpriteRenderer = spriteRenderer;
-		activeSpriteRenderer.idle = direction == Vector2.zero;
+    activeSpriteRenderer = spriteRenderer;
+    activeSpriteRenderer.idle = direction == Vector2.zero;
+  }
+
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.layer == LayerMask.NameToLayer("Explosion"))
+    {
+      DeathSequence();
+    }
+  }
+
+  private void DeathSequence()
+  {
+    enabled = false;
+    GetComponent<BombController>().enabled = false;
+
+    spriteRendererUp.enabled = false;
+    spriteRendererDown.enabled = false;
+    spriteRendererLeft.enabled = false;
+    spriteRendererRight.enabled = false;
+
+    spriteRendererDeath.enabled = true;
+
+    Invoke(nameof(OnDeathSequenceEnded), 1.25f);
+  }
+
+  private void OnDeathSequenceEnded()
+  {
+    gameObject.SetActive(false);
   }
 }
