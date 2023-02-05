@@ -6,13 +6,13 @@ public class PlayerController : MonoBehaviour
 {
   public new Rigidbody2D rigidbody { get; private set; }
   public KeyCode inputUp = KeyCode.W;
-  public KeyCode inputUpArrow = KeyCode.UpArrow;
+  // public KeyCode inputUpArrow = KeyCode.UpArrow;
   public KeyCode inputDown = KeyCode.S;
-  public KeyCode inputDownArrow = KeyCode.DownArrow;
+  // public KeyCode inputDownArrow = KeyCode.DownArrow;
   public KeyCode inputLeft = KeyCode.A;
-  public KeyCode inputLeftArrow = KeyCode.LeftArrow;
+  // public KeyCode inputLeftArrow = KeyCode.LeftArrow;
   public KeyCode inputRight = KeyCode.D;
-  public KeyCode inputRightArrow = KeyCode.RightArrow;
+  // public KeyCode inputRightArrow = KeyCode.RightArrow;
   public AnimatedSpriteRenderer spriteRendererUp;
   public AnimatedSpriteRenderer spriteRendererDown;
   public AnimatedSpriteRenderer spriteRendererLeft;
@@ -32,19 +32,19 @@ public class PlayerController : MonoBehaviour
 
   private void Update()
   {
-    if (Input.GetKey(inputUp) || Input.GetKey(inputUpArrow))
+    if (Input.GetKey(inputUp))
     {
       setDirection(Vector2.up, spriteRendererUp);
     }
-    else if (Input.GetKey(inputDown) || Input.GetKey(inputDownArrow))
+    else if (Input.GetKey(inputDown))
     {
       setDirection(Vector2.down, spriteRendererDown);
     }
-    else if (Input.GetKey(inputLeft) || Input.GetKey(inputLeftArrow))
+    else if (Input.GetKey(inputLeft))
     {
       setDirection(Vector2.left, spriteRendererLeft);
     }
-    else if (Input.GetKey(inputRight) || Input.GetKey(inputRightArrow))
+    else if (Input.GetKey(inputRight))
     {
       setDirection(Vector2.right, spriteRendererRight);
     }
@@ -101,5 +101,6 @@ public class PlayerController : MonoBehaviour
   private void OnDeathSequenceEnded()
   {
     gameObject.SetActive(false);
+		FindObjectOfType<GameManager>().CheckWinState();
   }
 }
