@@ -121,28 +121,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 8
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1df5a1d5a7f614e3d959395c23a6de04
-      internalID: -1653399844
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Mushrooms_1
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 0
-        width: 12
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -151,8 +130,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1799d64773c143b58490084a1362c25
-      internalID: -751996877
+      spriteID: 9cd28e2734da7485a865b16755fb217f
+      internalID: -1784384207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mushrooms_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2d4a1ec0964f4d67b02a0a7cb2278bd
+      internalID: 605140901
       vertices: []
       indices: 
       edges: []
@@ -161,10 +161,10 @@ TextureImporter:
       name: Mushrooms_2
       rect:
         serializedVersion: 2
-        x: 34
+        x: 32
         y: 0
-        width: 4
-        height: 5
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3c425ef1cc0f438ab8b4f3d0f512458
-      internalID: -2076038336
+      spriteID: de553197a7ccb41988223bd72b52a3ef
+      internalID: 117634273
       vertices: []
       indices: 
       edges: []
@@ -189,9 +189,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Mushrooms_0: -1653399844
-      Mushrooms_2: -2076038336
-      Mushrooms_1: -751996877
+      Mushrooms_0: -1784384207
+      Mushrooms_2: 117634273
+      Mushrooms_1: 605140901
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
