@@ -3657,7 +3657,7 @@ GameObject:
   - component: {fileID: 1976995069}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3767,3 +3767,6 @@ MonoBehaviour:
     m_Bits: 64
   explosionDuration: 1
   explosionRadius: 1
+  destructibleTiles: {fileID: 1200486864}
+  destructiblePrefab: {fileID: 424138951292650277, guid: 586b7e143afb843d2b7a80f861f8fcc2,
+    type: 3}
